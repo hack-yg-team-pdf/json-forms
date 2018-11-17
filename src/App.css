@@ -30,3 +30,42 @@
     transform: rotate(360deg);
   }
 }
+
+.sidebar, .json-forms {
+  float: left;
+  display: block;
+}
+
+.sidebar {
+  margin-right: 150px;
+}
+
+.json-forms {
+  margin-top: 28px;
+}
+
+#root {
+  padding-top: 40px;
+}
+
+#root h1 {
+  margin: 0;
+}
+
+.sidebar-list {
+  padding: 0 40px;
+}
+
+.sidebar-list h2 {
+  text-align: center;
+}
+
+.button {
+    margin-top: 50px;
+    background-color: green;
+    color: #FFF;
+    font-weight: bold;
+    line-height: 1.5;
+    border-radius: 5px;
+    font-size: 16px;
+}
