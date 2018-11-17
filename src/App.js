@@ -40,24 +40,15 @@ class App extends Component {
         });
     }
 
-    sidebarClickHandle(something) {
-        console.log(something);
-        alert(something);
-    }
+    sidebarClickHandle(menuItemForm) {
+        // console.log(`http://localhost:3500/forms/${menuItemForm.currentTarget.id}`)
+        console.log(`http://localhost:3500/forms/${this.state.menuItemId}`)
+        // console.log(`http://localhost:3500/forms/${menuItemForm.menuItemId}`)        
+        debugger;
 
-
-    componentDidMount() {
         axios
-            .get("http://localhost:3500/forms/yg3538_e")
+            .get(`http://localhost:3500/forms/${this.state.menuItemId}`)
             .then(response => {
-
-                // create an array of contacts only with relevant data
-                // const newContacts = response.data.map(c => {
-                //     return {
-                //         id: c.id,
-                //         name: c.name
-                //     };
-                // });
 
                 if (typeof response.data.fields != "undefined") {
                     let formSchema = response.data.fields;
@@ -71,27 +62,22 @@ class App extends Component {
                             uiSchema: uiSchema,
                             path: path,
                             data: data
-                        }
+                        },
+                        modal: false
                     });
-
-                    this.toggle = this.toggle.bind(this);
                 }
-
-                // create a new "State" object without mutating
-                // the original State object.
-                /*const newState = Object.assign({}, this.state, {
-                    formSchema: formSchema
-                });*/
-
-                // store the new state object in the component's state
-                //this.setState(newState);
-
+                // legacy jsonforms
                 //store.dispatch(Actions.init(data, formSchema, uischema));
 
             })
             .catch(error => {
                 console.log(error)
             });
+    }
+
+
+    componentDidMount() {
+
     }
 
 
