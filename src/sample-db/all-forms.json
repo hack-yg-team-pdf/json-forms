@@ -1,0 +1,27 @@
+// Array of categories
+[
+  {
+    "title": "Static JSONS",
+    "description": "Description is not displayed",
+    "forms": [
+      {
+        "title": "Awesome document 1 (3538)",
+        "description": "not used",
+        "pdf": "url-to-pdf",
+        "json": "yg_3538_e.json"
+      },
+      {
+        "title": "4552",
+        "description": "not used",
+        "pdf": "",
+        "json": "yg_4552_b.json"
+      }
+    ]
+  },
+  "cat2": {
+    "title": "Dynamic JSONS",
+    "forms": [
+
+    ]
+  }
+]
