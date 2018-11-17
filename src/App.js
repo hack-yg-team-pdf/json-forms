@@ -5,6 +5,16 @@ import { JsonForms } from '@jsonforms/react';
 
 
 class App extends Component {
+    constructor(props) {
+      super(props)
+
+      this.exampleMethod = this.exampleMethod.bind(this)
+    }
+
+    exampleMethod(something) {
+      console.log(`Tims output of this is`);
+      console.log(something);
+    }
 
     // TODO: Create header Component
     render() {
@@ -16,7 +26,7 @@ class App extends Component {
           </div>
 
          <div className="sidebar">
-             <Sidebar />
+             <Sidebar clickHandle={this.exampleMethod}/>
          </div>
 
           <div className="json-forms">

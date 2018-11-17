@@ -1,0 +1,68 @@
+{
+  "fields": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string",
+        "description": "name of nominee"
+      },
+      "title": {
+      	"type": "string",
+        "description": "description of nomineem"
+      },
+      "address": {
+      	"type":"string",
+        "description": "street address of nominee"
+      },
+      "city-postal": {
+        "type": "string",
+        "description": "city and postal code of nominee"
+       },
+       "telephone": {
+        	"type": "string", 
+        	"format": "telephone",
+        	"description": "telephone number of nominee"
+      },
+      "email": {
+      	"type": "string",
+        "description": "email of nominee"
+      },
+      "name-nom": {
+        "type": "string",
+        "description": "name of nominator"
+      },
+      "title-nom": {
+        "type": "string",
+        "description": "description of nominator"
+      },
+      "address-nom": {
+        "type":"string",
+        "description": "street address of nominator"
+      },
+      "city-postal-nom": {
+        "type": "string",
+        "description": "city and postal code of nominator"
+       },
+       "telephone-nom": {
+          "type": "string", 
+          "format": "telephone",
+          "description": "telephone number of nominator"
+      },
+      "email-nom": {
+        "type": "string",
+        "description": "email of nominator"
+      },
+      "description": {
+        "type": "string",
+        "description": "please indicate if you will provide photographs of the nominee or program",
+        "more": "description of nominees contribution to community safety"
+      },
+      "contact-request": {
+      	"type": "string",
+        "enum": [
+        	"yes", 
+        	"no"
+        ]
+        }
+    }
+
