@@ -1,8 +1,4 @@
 import React, { Component } from 'react';
-import logo from '../logo.svg';
-import '../App.css';
-import { JsonForms } from '@jsonforms/react';
-
 
 class Sidebar extends Component {
   constructor(props) {
