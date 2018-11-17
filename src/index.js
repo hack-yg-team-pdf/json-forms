@@ -12,22 +12,35 @@ import { materialFields, materialRenderers } from '@jsonforms/material-renderers
 
 import { person } from '@jsonforms/examples';
 
-import db from './sample-db/all-forms';
+// TODO: DELETE ME, testing purposes
+const yg3538 = require('./manual-json-forms/yg_3538_e');
 
-const schema = person.schema;
-const uischema = person.uischema
-const data = person.data;
+// import db_auto from './sample-db/automated_forms';
+// import db_manual from './sample-db/manual_forms';
 
-// TODO: This ain't the best place to deal with DB and fetching of the information.
-const test = db;
-db.map( (curr, id, val) => {
-    // curr is always a category
-    // Fetch all documents in the category and retrieve their JSON notation.
-    // Get the Schema and UI_Schema
-    
-});
+/* TODO: This ain't the best place to deal with DB and fetching of the information.
+    In fact, it should even be in a REST api server...
+ */
+//
+// db_manual.map( (category, id, categories) => {
+//     // curr is always a category
+//
+//     // Fetch all documents in the category and retrieve their JSON file.
+//     // Get the Schema and UI_Schema
+//
+//     // Handle default case when no JSON file specified. Retrieve per fname.
+//
+//     let stop;
+//     return stop;
+// });
 
+// const schema = person.schema;
+// const uischema = person.uischema
+// const data = person.data;
 
+let schema = yg3538.fields;
+let uischema = undefined;
+let data = undefined;
 
 const store = createStore(
   combineReducers({ jsonforms: jsonformsReducer() }),  
