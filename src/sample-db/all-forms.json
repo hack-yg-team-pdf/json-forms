@@ -1,7 +1,6 @@
-// Array of categories
 [
   {
-    "title": "Static JSONS",
+    "title": "Manually processed JSON",
     "description": "Description is not displayed",
     "forms": [
       {
@@ -18,8 +17,9 @@
       }
     ]
   },
-  "cat2": {
+  {
     "title": "Dynamic JSONS",
+    "description": "",
     "forms": [
 
     ]

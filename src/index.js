@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Form from './Form';
-import Sidebar from './Sidebar';
+import App from './App';
+import Sidebar from './components/Sidebar';
 import * as serviceWorker from './serviceWorker';
 import { combineReducers, createStore } from 'redux';
 import { Provider } from 'react-redux';
@@ -44,7 +44,7 @@ store.dispatch(Actions.init(data, schema, uischema));
 
 ReactDOM.render(
     <Provider store={store}>
-        <Form />
+        <App />
     </Provider>
     , document.getElementById('root')
 );
