@@ -22,7 +22,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            modal: true,
+            modal: false,
             form: {
                 schema: {},
                 uiSchema: {},
@@ -41,45 +41,42 @@ class App extends Component {
     }
 
     sidebarClickHandle(menuItemForm) {
-        // console.log(`http://localhost:3500/forms/${menuItemForm.currentTarget.id}`)
-        console.log(`http://localhost:3500/forms/${this.state.menuItemId}`)
-        // console.log(`http://localhost:3500/forms/${menuItemForm.menuItemId}`)        
-        debugger;
+        console.log(`Accessing REST @ http://localhost:3500/forms/${this.props.id}`);
 
+        let test = "";
+        let self = this;
         axios
-            .get(`http://localhost:3500/forms/${this.state.menuItemId}`)
+            .get(`http://localhost:3500/forms/${this.props.id}`)
             .then(response => {
-
+                debugger;
                 if (typeof response.data.fields != "undefined") {
                     let formSchema = response.data.fields;
-                    let uiSchema = (response.data.ui === undefined) ? {} : response.data.ui;
-                    let path = {}; // I don't even know what path is...
-                    let data = {}; // TODO Implement one day
-
-                    this.setState({
+                    self.props.app.setState({
                         form: {
-                            schema: formSchema,
-                            uiSchema: uiSchema,
-                            path: path,
-                            data: data
+                            schema: formSchema
                         },
-                        modal: false
+                        modal: true
                     });
-                }
-                // legacy jsonforms
-                //store.dispatch(Actions.init(data, formSchema, uischema));
 
+                    /*let uiSchema = (response.data.ui === undefined) ? {} : response.data.ui;
+                    let path = {}; // I don't even know what path is...
+                    let data = {}; // TODO Implement one day*/
+
+                    // this.setState({
+                    //     form: {
+                    //         schema: formSchema,
+                    //         uiSchema: uiSchema,
+                    //         path: path,
+                    //         data: data
+                    //     }
+                    // });
+                }
             })
             .catch(error => {
                 console.log(error)
+                alert(error);
             });
     }
-
-
-    componentDidMount() {
-
-    }
-
 
     // TODO: Create header Component
     render() {
@@ -102,7 +99,7 @@ class App extends Component {
 
                 <div className={'row'}>
                     <div className={"col col-sm-12 sidebar"}>
-                        <Sidebar clickHandle={this.sidebarClickHandle}/>
+                        <Sidebar clickHandle={this.sidebarClickHandle} app={this}/>
                     </div>
                 </div>
 

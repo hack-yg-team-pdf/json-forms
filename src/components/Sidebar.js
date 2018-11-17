@@ -21,17 +21,29 @@ class Sidebar extends Component {
     }
 
   render() {
-    // <FormMenuItem id={4202} name={"Meow"} />
-      let stop;
+      const categoriesRender = () => {
+          let categories = this.state.categories;
+          let test = Object.keys(categories).map((cat, i) => {
+              return <MenuCategoryForm app={this.props.app} name={cat} files={categories[cat]} clickHandle={this.props.clickHandle}/>
+          });
+
+          return test;
+      }
+      //categoriesRender();
+
     return (
       <div className="sidebar-list"> 
           {
-              this.state.categories.map( (cat, i) => {
-                  return( <MenuCategoryForm name={cat.name} alt={cat.description} files={cat.fileinfo} clickHandle={this.props.clickHandle}/> )
-              } )
+              categoriesRender()
           }
       </div>
     );
+
+    /*
+    this.state.categories.map( (cat, i) => {
+                  return( <MenuCategoryForm name={cat.name} alt={cat.description} files={cat.fileinfo} clickHandle={this.props.clickHandle}/> )
+              } )
+     */
   }
 }
 

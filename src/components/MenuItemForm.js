@@ -8,8 +8,7 @@ class MenuItemForm extends Component {
             classes: "",
             menuitemformid: "",
             description: "",
-            name: "",
-            menuItemId: "3538"
+            name: ""
         }
 
         if (typeof props.clickHandle == "function" )

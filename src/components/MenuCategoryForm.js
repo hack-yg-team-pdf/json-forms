@@ -26,8 +26,10 @@ class MenuCategoryForm extends Component {
                             let stop;
                             return(
                                 <FormMenuItem
+                                    app={this.props.app}x
                                     id={file.id}
-                                    name={file.description}
+                                    menuItemId={file.id}
+                                    name={file.label}
                                     description={'Sample description'}
                                     pdf={file.fname}
                                     classes={'cool'}
