@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import logo from '../logo.svg';
+import App from '../App.js';
 import '../App.css';
 import { JsonForms } from '@jsonforms/react';
 
@@ -7,26 +8,33 @@ import { JsonForms } from '@jsonforms/react';
 class Sidebar extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      findCities: false
-    }
-    // this.findHottestCities = this.findHottestCities.bind(this)
+    // this.state = {
+    //   exampleState: false
+    // }
+
+    this.timsClickHandler = props.clickHandle;
+
+    //this.handleClick = this.handleClick.bind(this)
+  }
+  // method to create a list of json forms from JSON:
+  // findJSONlist {
+  // }
+
+  handleClick(event, el) {
+    console.log('pdf with id of ' + event);
+    console.log(event);
+    console.log(el);
+    // App.exampleMethod(id);
   }
 
   render() {
+    // <FormMenuItem id={4202} name={"Meow"} />
     return (
       <div className="sidebar-list"> 
       	<h2>JSON Forms</h2>
       	<ul className="json-list">
-      		<li><a href="#" id="4202">PDF YG4202</a></li>
-      		<li><a href="#" id="4203">PDF YG4203</a></li>
-      		<li><a href="#" id="4204">PDF YG4204</a></li>
-      		<li><a href="#" id="4205">PDF YG4205</a></li>
-      		<li><a href="#" id="4206">PDF YG4206</a></li>
-      		<li><a href="#" id="4207">PDF YG4207</a></li>
-      		<li><a href="#" id="4208">PDF YG4208</a></li>
-      		<li><a href="#" id="4209">PDF YG4209</a></li>
-      		<li><a href="#" id="4210">PDF YG4210</a></li>
+      		<li onClick={this.handleClick}><a href="#" id="4202">PDF YG4202</a></li>
+      		<li><a href="#" id="4203" onClick={this.timsClickHandler(this)}>PDF YG4203</a></li>
   		</ul>
       </div>
     );
