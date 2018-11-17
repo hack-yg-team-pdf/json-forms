@@ -27,7 +27,7 @@ class Sidebar extends Component {
       <div className="sidebar-list"> 
           {
               this.state.categories.map( (cat, i) => {
-                  return( <MenuCategoryForm name={cat.name} alt={cat.description} files={cat.fileinfo}/> )
+                  return( <MenuCategoryForm name={cat.name} alt={cat.description} files={cat.fileinfo} clickHandle={this.props.clickHandle}/> )
               } )
           }
       </div>

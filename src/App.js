@@ -1,19 +1,43 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Sidebar from './components/Sidebar';
 import './App.css';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import * as actionCreators from './actionCreators';
-import { JsonForms } from '@jsonforms/react';
+import {JsonForms} from '@jsonforms/react';
 import axios from 'axios';
 import {Actions} from "@jsonforms/core/lib/index";
 
+
+// Bootstrap
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+
+
+// Testing https://github.com/mozilla-services/react-jsonschema-form
+import Form from "react-jsonschema-form";
 
 
 class App extends Component {
 
     constructor(props) {
-      super(props)
+        super(props);
+        this.state = {
+            modal: true,
+            form: {
+                schema: {},
+                uiSchema: {},
+                data: {},
+                path: {}
+            }
+        };
+
+        this.toggle = this.toggle.bind(this);
+    }
+
+    toggle() {
+        this.setState({
+            modal: !this.state.modal
+        });
     }
 
     sidebarClickHandle(something) {
@@ -35,7 +59,23 @@ class App extends Component {
                 //     };
                 // });
 
-                let formSchema = response;
+                if (typeof response.data.fields != "undefined") {
+                    let formSchema = response.data.fields;
+                    let uiSchema = (response.data.ui === undefined) ? {} : response.data.ui;
+                    let path = {}; // I don't even know what path is...
+                    let data = {}; // TODO Implement one day
+
+                    this.setState({
+                        form: {
+                            schema: formSchema,
+                            uiSchema: uiSchema,
+                            path: path,
+                            data: data
+                        }
+                    });
+
+                    this.toggle = this.toggle.bind(this);
+                }
 
                 // create a new "State" object without mutating
                 // the original State object.
@@ -57,31 +97,47 @@ class App extends Component {
 
     // TODO: Create header Component
     render() {
-    return (
-      <div>
+        const closeBtn = <button className="close" onClick={this.toggle}>&times;</button>;
 
-          <div>
-              <h1>Awesome Cool fantastyc app!</h1>
-          </div>
+        return (
+            /*
+                                    <JsonForms
+                            schema={this.state.form.schema}
+                            uischema={this.state.form.uiSchema}
+                            path={this.state.form.path}
+                        />
+             */
+            <div className={'container container-fluid mx-1'}>
+                <Button color="danger" onClick={this.toggle} className={'btn-lg'}>Show Form</Button>
 
-         <div className="sidebar">
-             <Sidebar clickHandle={this.sidebarClickHandle}/>
-         </div>
+                <div className={'row text-center'}>
+                    <h1 className={'mx-auto'}>Awesome Cool fantastyc app!</h1>
+                </div>
 
-          <div className="json-forms">
-          <h1>Title</h1>
-              <JsonForms
-                  schema={this.props.formSchema}
-                  uischema={this.props.uiSchema}
-                  path={this.props.path}
-              />
-          <button type="button" className="button">Submit Form</button> 
+                <div className={'row'}>
+                    <div className={"col col-sm-12 sidebar"}>
+                        <Sidebar clickHandle={this.sidebarClickHandle}/>
+                    </div>
+                </div>
 
-          </div>
-                       
-      </div>
-    );
-  }
+                <Modal isOpen={this.state.modal} toggle={this.toggle} className={`${this.props.className} mx-auto container-fluid`}>
+                    <ModalHeader toggle={this.toggle} close={closeBtn}>Modal title</ModalHeader>
+                    <ModalBody>
+                        <Form schema={this.state.form.schema}
+                              onChange={console.log("changed")}
+                              onSubmit={console.log("submitted")}
+                              onError={console.log("errors")}
+                        />
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '}
+                        <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+                    </ModalFooter>
+                </Modal>
+
+            </div>
+        );
+    }
 }
 
 /*
@@ -90,16 +146,19 @@ https://stackoverflow.com/questions/35300419/redux-do-i-have-to-import-store-in-
 
  */
 
-const mapStateToProps = (state, ownProps = {}) =>  {
+const mapStateToProps = (state, ownProps = {}) => {
+    // use jsonforms.core.schema
     return {
         jsonforms: state.jsonforms,
+        formSchema: state.formSchema
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({
-        updateFormSchema: actionCreators.updateFormSchema,
-    }, dispatch)
+    /*return bindActionCreators({
+        updateFormSchema: actionCreators.updateFormSchema.bind(null, data, formSchema, uiSchema),
+    }, dispatch)*/
+    return bindActionCreators({}, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
