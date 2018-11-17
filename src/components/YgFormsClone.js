@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {Helmet} from "react-helmet";
+import YgFormsContent from './YgFormsContent'
 
 class YgFormsClone extends Component {
   render () {
@@ -69,7 +70,7 @@ class YgFormsClone extends Component {
           </div>
           <div id="full"> 
             <h1>Government of Yukon forms listed alphabetically</h1>
-            <span>Dynamic content goes here!</span>
+            <YgFormsContent />
           </div>
         </div>
     )
