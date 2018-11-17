@@ -1,0 +1,18 @@
+[
+  {
+    "category": "Manually processed JSON",
+    "description": "Description is not displayed",
+    "fileinfo": [
+      {
+        "description": "Name of 3538",
+        "fname": "url-to-pdf",
+        "json": "yg_3538_e.json"
+      },
+      {
+        "description": "Name of 4552",
+        "pdf": "",
+        "json": "yg_4552_b.json"
+      }
+    ]
+  }
+]
