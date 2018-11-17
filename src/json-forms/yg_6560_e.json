@@ -3,7 +3,7 @@
     "type": "object",
     "properties": {
       "intro-text": {
-        "type":
+        "type": "string"
       },
       "id82934": {
         "type": "string",
@@ -25,16 +25,16 @@
         "type": "string",
         "description": "Community"
       },
-      "postal-code":{
+      "postal-code": {
         "type": "string",
         "description": "Postal code"
       },
       "group-supervisor": {
-        "type": "string", 
+        "type": "string",
         "description": "Group supervisor"
       },
       "contact-phone": {
-        "type": "string", 
+        "type": "string",
         "format": "telephone",
         "description": "alternate-telephone-number"
       },
@@ -42,53 +42,44 @@
         "type": "string",
         "format": "telephone"
       },
-      "name-of-public-body": {
+      "email": {
         "type": "string",
-        "description": "(department,-corporation-or-agency)-Please-complete-a-seperate-form-for-each-public-body)"
+        "format": "email",
+        "description": "email address"
       },
-      "information-requested": {
-        "type": "string"
-      },
-      "preferred-method-of-access-to-records": {
+      "preferred-written-correspondence-by": {
         "type": "string",
         "enum": [
-          "Examine-original", 
-          "Receive-copy"
+          "Email",
+          "Mail"
         ]
       },
-      "signature": {
-          "type": "string",
-      },
-      "date-signed": {
-        "type": "string",
-        "format": "date"
-      },
-      "request-no": {
-        "type": "integer"
-      },
-      "date-received": {
-        "type": "string",
-        "format": "date"
-      },
-      "records-manager": {
-        "type": "string"
-      },
-      "time-limit-for-response-to-application:": {
-        "type": "string"
-      }
-    }
+      "section-number": "string",
+      "week-preference": "string",
+      "special-conditions": "string",
+      "description": "ie young children"
+    },
+    "section-number": "string",
+    "week-preference": "string",
+    "special-conditions": "string",
+    "description": "ie young children"
   },
-  "ui": {
-    "type": "VerticalLayout",
-    "elements": [
-      {
-        "type": "Control",
-        "scope": "#/properties/name"
-      },
-      {
-        "type": "Control",
-        "scope": "#/properties/UKWN-PROP-12"
-      }
+  "additional-section": {
+    "type": "string",
+    "enum": [
+      "yes",
+      "no"
     ]
+  },
+  "declaration": {
+    "type": "string",
+    "description": "Agree to having read the attached instructions and conditions and agree to perform the work outlined"
+  },
+  "signature": {
+    "type": "string"
+  },
+  "date-signed": {
+    "type": "string",
+    "format": "date"
   }
 }
