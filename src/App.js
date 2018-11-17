@@ -120,7 +120,12 @@ class App extends Component {
                     </div>
                 </div>
 
-                <Modal isOpen={this.state.modal} toggle={this.toggle} className={`${this.props.className} mx-auto container-fluid`}>
+                <Modal
+                    isOpen={this.state.modal}
+                    size={'modal-lg'}
+                    toggle={this.toggle}
+                    className={`${this.props.className} mx-auto container-fluid`}
+                >
                     <ModalHeader toggle={this.toggle} close={closeBtn}>Modal title</ModalHeader>
                     <ModalBody>
                         <Form schema={this.state.form.schema}
