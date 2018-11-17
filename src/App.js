@@ -21,7 +21,7 @@ class App extends Component {
          </div>
 
           <div className="json-forms">
-          <h1>{formTitle}</h1>
+          <h1>Title</h1>
              <JsonForms />
           <button type="button" className="button">Submit Form</button> 
 
