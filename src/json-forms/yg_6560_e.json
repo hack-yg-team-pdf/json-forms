@@ -1,0 +1,94 @@
+{
+  "fields": {
+    "type": "object",
+    "properties": {
+      "intro-text": {
+        "type":
+      },
+      "id82934": {
+        "type": "string",
+        "minLength": 3,
+        "description": "Name of registered organization or group",
+        "more": "must be registered as a non-profit organization with Community Services, Corporate Affairs Branch"
+      },
+      "registry": {
+        "type": "integer",
+        "description": "Registry #",
+        "more": "6 digits"
+      },
+      "mailing-address": {
+        "type": "string",
+        "description": "Mailing address",
+        "more": "where notifications and correspondence should be sent"
+      },
+      "community": {
+        "type": "string",
+        "description": "Community"
+      },
+      "postal-code":{
+        "type": "string",
+        "description": "Postal code"
+      },
+      "group-supervisor": {
+        "type": "string", 
+        "description": "Group supervisor"
+      },
+      "contact-phone": {
+        "type": "string", 
+        "format": "telephone",
+        "description": "alternate-telephone-number"
+      },
+      "fax": {
+        "type": "string",
+        "format": "telephone"
+      },
+      "name-of-public-body": {
+        "type": "string",
+        "description": "(department,-corporation-or-agency)-Please-complete-a-seperate-form-for-each-public-body)"
+      },
+      "information-requested": {
+        "type": "string"
+      },
+      "preferred-method-of-access-to-records": {
+        "type": "string",
+        "enum": [
+          "Examine-original", 
+          "Receive-copy"
+        ]
+      },
+      "signature": {
+          "type": "string",
+      },
+      "date-signed": {
+        "type": "string",
+        "format": "date"
+      },
+      "request-no": {
+        "type": "integer"
+      },
+      "date-received": {
+        "type": "string",
+        "format": "date"
+      },
+      "records-manager": {
+        "type": "string"
+      },
+      "time-limit-for-response-to-application:": {
+        "type": "string"
+      }
+    }
+  },
+  "ui": {
+    "type": "VerticalLayout",
+    "elements": [
+      {
+        "type": "Control",
+        "scope": "#/properties/name"
+      },
+      {
+        "type": "Control",
+        "scope": "#/properties/UKWN-PROP-12"
+      }
+    ]
+  }
+}
