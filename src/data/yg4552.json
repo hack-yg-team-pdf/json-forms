@@ -1,0 +1,90 @@
+{
+  "type": "object",
+  "title": "Request for access to records",
+  "required": [],
+  "properties": {
+    "0": {
+      "type": "object",
+      "title": "Applicant",
+      "properties": {
+        "76": {
+          "title": "Name (last, first, middle)",
+          "type": "string"
+        },
+        "63": {
+          "type": "string",
+          "title": "Salutation",
+          "enum": [
+            "Mrs.",
+            "Miss",
+            "Mr.",
+            "Other",
+            "Autre"
+          ],
+          "enumNames": [
+            "Mrs.",
+            "Miss",
+            "Mr.",
+            "Other",
+            "Autre"
+          ]
+        },
+        "77": {
+          "title": "Company / Organization (if applicable)",
+          "type": "string"
+        },
+        "74": {
+          "title": "Mailing address",
+          "type": "string"
+        },
+        "72": {
+          "title": "City or town",
+          "type": "string"
+        },
+        "70": {
+          "title": "Territoire/province",
+          "type": "string"
+        },
+        "700": {
+          "title": "Code postal",
+          "type": "string"
+        },
+        "62": {
+          "title": "Telephone (day)",
+          "type": "string"
+        }
+      }
+    },
+    "1": {
+      "type":"object",
+      "title": "Requested Information",
+      "properties": {
+        "01": {
+          "type": "string",
+          "title": "Name of public body (department corporation or agency)"
+        },
+        "11": {
+          "type": "string",
+          "title": "Information requested",
+          "description": "Please list dates, events, agencies involved, file numbers and any other details which will help the Public Body locate the records. If you are requesting another person’s information, you must attach either that person’s signed consent for disclosure or proof of authority to act on that person’s behalf."
+        },
+        "680": {
+          "type": "string",
+          "title": "Preferred method of access to records",
+          "enum": [
+            "Examine Original",
+            "Receive Copy"
+          ],
+          "enumNames": [
+            "Examine Original",
+            "Receive Copy"
+          ]
+        }
+      }
+    },
+    "82": {
+      "title": "Your signature",
+      "type": "string"
+    }
+  }
+}

@@ -3,26 +3,24 @@ import Sidebar from './components/Sidebar';
 import './App.css';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as actionCreators from './actionCreators';
-import {JsonForms} from '@jsonforms/react';
 import axios from 'axios';
-import {Actions} from "@jsonforms/core/lib/index";
+import yg4552 from './data/yg4552.json'
+import { clone } from 'lodash'
+// import yg4552 from './data/form-api-server/automated-json-forms/yg4552_b.json'
 
 
 // Bootstrap
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
-
 // Testing https://github.com/mozilla-services/react-jsonschema-form
 import Form from "react-jsonschema-form";
-
 
 class App extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            modal: false,
+            modal: true,
             form: {
                 schema: {},
                 uiSchema: {},
@@ -34,67 +32,90 @@ class App extends Component {
         this.toggle = this.toggle.bind(this);
     }
 
-    toggle() {
-        this.setState({
-            modal: !this.state.modal
-        });
+    buildSchema () {
+        return clone(yg4552)
     }
 
-    sidebarClickHandle(menuItemForm) {
-        console.log(`Accessing REST @ http://localhost:3500/forms/${this.props.id}`);
+    schemaTitle () {
+        return this.buildSchema().title
+    }
 
-        let test = "";
-        let self = this;
+    titlelessSchema () {
+        const result = this.buildSchema()
+        delete result.title
+        return result
+    }
+
+    toggle() {
+        this.setState({ modal: !this.state.modal })
+    }
+
+    setFormSchemaAndShow (formSchema) {
+        this.props.app.setState({
+            form: {
+                schema: formSchema
+            },
+            modal: true
+        })
+    }
+
+    attemptFormLoadFromServer (formId) {
+        console.log(`Accessing REST @ http://localhost:3500/forms/${this.props.id}`)
         axios
             .get(`http://localhost:3500/forms/${this.props.id}`)
             .then(response => {
-                debugger;
-                if (typeof response.data.fields != "undefined") {
-                    let formSchema = response.data.fields;
-                    self.props.app.setState({
-                        form: {
-                            schema: formSchema
-                        },
-                        modal: true
-                    });
-
-                    /*let uiSchema = (response.data.ui === undefined) ? {} : response.data.ui;
-                    let path = {}; // I don't even know what path is...
-                    let data = {}; // TODO Implement one day*/
-
-                    // this.setState({
-                    //     form: {
-                    //         schema: formSchema,
-                    //         uiSchema: uiSchema,
-                    //         path: path,
-                    //         data: data
-                    //     }
-                    // });
+                if (response.data.fields === undefined) {
+                    console.error(`I didn't understand the server response for form ${this.props.id}; couldn't find form schema`)
+                    return
                 }
+                this.setFormSchemaAndShow(response.data.fields)
+                /*let uiSchema = (response.data.ui === undefined) ? {} : response.data.ui;
+                let path = {}; // I don't even know what path is...
+                let data = {}; // TODO Implement one day*/
+                // this.setState({
+                //     form: {
+                //         schema: formSchema,
+                //         uiSchema: uiSchema,
+                //         path: path,
+                //         data: data
+                //     }
+                // });
             })
             .catch(error => {
                 console.log(error)
-                alert(error);
-            });
+                alert(error)
+            })
+    }
+
+    sidebarClickHandle(menuItemForm) {
+        // this.setFormSchemaAndShow(yg4552)
+        this.props.app.setState({
+            form: {
+                schema: yg4552
+            },
+            modal: true
+        })
     }
 
     // TODO: Create header Component
     render() {
         const closeBtn = <button className="close" onClick={this.toggle}>&times;</button>;
 
-        return (
-            /*
-                                    <JsonForms
-                            schema={this.state.form.schema}
-                            uischema={this.state.form.uiSchema}
-                            path={this.state.form.path}
-                        />
-             */
-            <div className={'container container-fluid mx-1'}>
-                <Button color="danger" onClick={this.toggle} className={'btn-lg'}>Show Form</Button>
+        const onSubmit = ({formData}) => {
+            console.log("Data submitted: ",  formData)
+            this.toggle()
+        }
 
+        const onErrors = ({errorsData}) => {
+            console.log("Form.onErrors")
+            window.errors = errorsData
+            console.log(errorsData)
+        }
+
+        return (
+            <div className={'container container-fluid mx-1'}>
                 <div className={'row text-center'}>
-                    <h1 className={'mx-auto'}>Awesome Cool fantastyc app!</h1>
+                    <h1 className={'mx-auto'}>Repository Yukon Government Forms</h1>
                 </div>
 
                 <div className={'row'}>
@@ -109,18 +130,13 @@ class App extends Component {
                     toggle={this.toggle}
                     className={`${this.props.className} mx-auto container-fluid`}
                 >
-                    <ModalHeader toggle={this.toggle} close={closeBtn}>Modal title</ModalHeader>
+                    <ModalHeader toggle={this.toggle} close={closeBtn}>{this.schemaTitle()}</ModalHeader>
                     <ModalBody>
-                        <Form schema={this.state.form.schema}
-                              onChange={console.log("changed")}
-                              onSubmit={console.log("submitted")}
-                              onError={console.log("errors")}
+                        <Form schema={this.titlelessSchema()}
+                              onSubmit={onSubmit}
+                              onError={onErrors}
                         />
                     </ModalBody>
-                    <ModalFooter>
-                        <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '}
-                        <Button color="secondary" onClick={this.toggle}>Cancel</Button>
-                    </ModalFooter>
                 </Modal>
 
             </div>
