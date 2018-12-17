@@ -1,10 +1,11 @@
-import React, {Component} from 'react';
-import Sidebar from './components/Sidebar';
-import './App.css';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+import React, {Component} from 'react'
+import Sidebar from './components/Sidebar'
+import './App.css'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 import yg4552 from './data/yg4552.json'
 import { clone } from 'lodash'
+import axios from "axios/index"
 
 // Bootstrap
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
@@ -58,16 +59,31 @@ class App extends Component {
         }
     }
 
-    showForm (formId) {
+    showForm (formId, formDetails) {
         console.log(`User requested to show form ${formId}`)
+        window.formDetails = formDetails
 
+        // special case ...
         if(formId === 'yg4552') {
             this.setState({
                 modalOpen: true,
                 modalSchema: yg4552
             })
+            return
         }
-        // now do it!
+
+        // all other forms, go get the data from the server ...
+        axios
+            .get(`http://localhost:3500/forms/${formId}`)
+            .then(response => {
+                this.setState({
+                    modalOpen: true,
+                    modalSchema: response.data
+                });
+            })
+            .catch(error => {
+                console.log(error)
+            });
     }
 
     render() {
@@ -81,7 +97,7 @@ class App extends Component {
                     <div className={"col col-sm-12 sidebar"}>
                         <Sidebar
                             app={this}
-                            clickHandle={(formId) => this.showForm(formId)}
+                            clickHandle={(formId, formDetails) => this.showForm(formId, formDetails)}
                         />
                     </div>
                 </div>

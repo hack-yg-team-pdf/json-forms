@@ -21,7 +21,7 @@ class MenuCategoryForm extends Component {
                                     {' '}
                                     <Button
                                         color="primary"
-                                        onClick={() => this.props.clickHandle(file.id)}
+                                        onClick={() => this.props.clickHandle(file.id, file)}
                                     >
                                         Open Webform Version
                                     </Button>
