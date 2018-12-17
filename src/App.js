@@ -99,8 +99,6 @@ class App extends Component {
 
     // TODO: Create header Component
     render() {
-        const closeBtn = <button className="close" onClick={this.toggle}>&times;</button>;
-
         const onSubmit = ({formData}) => {
             console.log("Data submitted: ",  formData)
             this.toggle()
@@ -130,7 +128,9 @@ class App extends Component {
                     toggle={this.toggle}
                     className={`${this.props.className} mx-auto container-fluid`}
                 >
-                    <ModalHeader toggle={this.toggle} close={closeBtn}>{this.schemaTitle()}</ModalHeader>
+                    <ModalHeader toggle={this.toggle} close={
+                        <button className="close" onClick={this.toggle}>&times;</button>
+                    }>{this.schemaTitle()}</ModalHeader>
                     <ModalBody>
                         <Form schema={this.titlelessSchema()}
                               onSubmit={onSubmit}
