@@ -74,7 +74,7 @@ class App extends Component {
         return (
             <div className={'container container-fluid mx-1'}>
                 <div className={'row text-center'}>
-                    <h1 className={'mx-auto'}>Repository Yukon Government Forms</h1>
+                    <h1 className={'mx-auto'}>Repository of all Yukon Government Forms</h1>
                 </div>
 
                 <div className={'row'}>
