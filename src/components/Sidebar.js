@@ -8,35 +8,35 @@ class Sidebar extends Component {
       this.state = {categories: []}
   }
 
-    componentDidMount() {
-        axios
-            .get("http://localhost:3500/form-categories/")
-            .then(response => {
-                this.setState({categories: response.data});
+  componentDidMount() {
+      axios
+          .get("http://localhost:3500/form-categories/")
+          .then(response => {
+              this.setState({categories: response.data});
 
-            })
-            .catch(error => {
-                console.log(error)
-            });
-    }
+          })
+          .catch(error => {
+              console.log(error)
+          });
+  }
 
   render() {
       const categoriesRender = () => {
-          let categories = this.state.categories;
-          let test = Object.keys(categories).map((cat, i) => {
-              return <MenuCategoryForm app={this.props.app} name={cat} files={categories[cat]} clickHandle={this.props.clickHandle}/>
+          return Object.keys(this.state.categories).map((cat, i) => {
+              return <MenuCategoryForm
+                      name={cat}
+                      files={this.state.categories[cat]}
+                      clickHandle={this.props.clickHandle}
+                      />
           });
-
-          return test;
       }
-      //categoriesRender();
 
     return (
-      <div className="sidebar-list"> 
-          {
-              categoriesRender()
-          }
-      </div>
+          <div className="sidebar-list"> 
+            {
+                categoriesRender()
+            }
+          </div>
     );
 
     /*

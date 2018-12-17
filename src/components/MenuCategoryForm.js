@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Button } from 'reactstrap';
 
 class MenuCategoryForm extends Component {
     render() {
@@ -12,11 +13,18 @@ class MenuCategoryForm extends Component {
                                 <li>
                                     <a
                                         id={`a-link-for-form-${file.id}`}
-                                        href="#"
-                                        onClick={this.props.clickHandle}
+                                        href={file.url_english}
+                                        target='_blank'
                                     >
                                         {file.label}
                                     </a>
+                                    {' '}
+                                    <Button
+                                        color="primary"
+                                        onClick={() => this.props.clickHandle(file.id)}
+                                    >
+                                        Open Form
+                                    </Button>
                                 </li>
                             );
                         })
