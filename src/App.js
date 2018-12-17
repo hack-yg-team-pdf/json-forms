@@ -6,6 +6,7 @@ import {bindActionCreators} from 'redux'
 import yg4552 from './data/yg4552.json'
 import { clone } from 'lodash'
 import axios from "axios/index"
+import snakeCase from 'js-snakecase'
 
 // Bootstrap
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
@@ -76,9 +77,26 @@ class App extends Component {
         axios
             .get(`http://localhost:3500/forms/${formId}`)
             .then(response => {
+
+                const startingSchema = response.data
+                const endingSchema = {
+                    type: 'object',
+                    properties: {},
+                    title: formDetails.label
+                }
+
+                Object.keys(startingSchema.fields.properties).forEach((propertyNumber) => {
+                    const property = clone(startingSchema.fields.properties[propertyNumber])
+
+                    property.title = property.description
+                    delete property.description
+
+                    endingSchema.properties[snakeCase(property.title)] = property
+                })
+
                 this.setState({
                     modalOpen: true,
-                    modalSchema: response.data
+                    modalSchema: endingSchema
                 });
             })
             .catch(error => {
