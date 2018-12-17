@@ -1,27 +1,18 @@
 import React, { Component } from 'react';
 
 class MenuItemForm extends Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            classes: "",
-            menuitemformid: "",
-            description: "",
-            name: ""
-        }
-
-        if (typeof props.clickHandle == "function" )
-            this.clickHandle = props.clickHandle.bind(this);
-
-    }
-
-    // id={this.props.id}
-
     render() {
         return (
             <li>
-                <a className={this.props.classes} href="#" id={this.props.menuItemId} onClick={this.clickHandle} alt={this.props.description}>{this.props.name}</a>
+                <a
+                    id={this.props.menuItemId}
+                    className={this.props.classes}
+                    href="#"
+                    onClick={this.clickHandle}
+                    alt={this.props.description}
+                >
+                    {this.props.name}
+                </a>
             </li>
         );
     }
